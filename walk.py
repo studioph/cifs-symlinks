@@ -18,3 +18,7 @@ def oswalk(start):
         print(f'dirs={dirs}')
         print(f'files={files}')
 
+print('os.walk:')
+oswalk(here)
+print('pathwalk:')
+pathwalk(here)
