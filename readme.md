@@ -1,6 +1,6 @@
 # Symlinks
 
-Reproducible example for [this issue](https://github.com/python/cpython/issues/102503) with `os.walk` not detecting symlinks correctly on mounted CIFS filesystems.
+Reproducible example for [this issue](https://github.com/python/cpython/issues/102503) with `os.walk` not detecting symlinks correctly on mounted CIFS filesystems due to a bug in the kernel CIFS driver.
 
 ## Running
 1. Install samba (`sudo apt install samba`)
@@ -47,11 +47,8 @@ Where the `D_TYPE` value is incorrectly reported for both symlinks
 
 ## Solutions
 
-- Use NFS (full POSIX compliance)
-  - [Azure files CSI over NFS example](https://github.com/kubernetes-sigs/azurefile-csi-driver/blob/master/deploy/example/storageclass-azurefile-nfs.yaml)
+- Use NFS if possible (full POSIX compliance)
   
 - Use alternative traversal methods (i.e. `pathlib`)
   
   - Less efficient (extra `stat` system call for each item to determine if file or folder)
-    
-  - Requires modifying multiQC script to be able to use alternative traversal method
